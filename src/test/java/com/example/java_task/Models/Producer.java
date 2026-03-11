@@ -1,6 +1,7 @@
 package com.example.java_task.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Producer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Nazwa producenta jest wymagana")
     private String name;
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
