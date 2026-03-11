@@ -200,6 +200,40 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "searchProducts",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pageNumber\": 0,\r\n    \"pageSize\": 10,\r\n    \"sortBy\": \"name\",\r\n    \"sortDirection\": \"ASC\",\r\n    \"filter\": \"czerni\",\r\n    \"filterBy\": \"description\",\r\n    \"filterOperand\": \"like\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products/commands/search",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products",
+                "commands",
+                "search"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },

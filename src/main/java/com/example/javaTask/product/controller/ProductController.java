@@ -22,17 +22,17 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<GetAllProductsResponse> getAllProducts() {
+    public ResponseEntity<GetAllProductsResponse> getAllProducts(){
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetProductResponse> getProductById(@PathVariable Long id) {
+    public ResponseEntity<GetProductResponse> getProductById(@PathVariable Long id){
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @GetMapping("/withAttribute/{attribute}")
-    public ResponseEntity<GetProductsByAttributeResponse> getListOFProductsWithGivenAttribute(@PathVariable String attribute) {
+    public ResponseEntity<GetProductsByAttributeResponse> getListOFProductsWithGivenAttribute(@PathVariable String attribute){
         return ResponseEntity.ok(productService.getProductsByAttribute(attribute));
     }
 
