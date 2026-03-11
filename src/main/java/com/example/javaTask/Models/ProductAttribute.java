@@ -1,4 +1,4 @@
-package com.example.java_task.Models;
+package com.example.javaTask.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -18,13 +18,13 @@ public class ProductAttribute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Key musi nie moze byc pusty")
-    @Size(max = 200,message = "Key jest za dlugi")
+    @NotBlank(message = "Key can't be empty")
+    @Size(max = 200,message = "Key is too long max length is 200 characters")
     @Column(name = "attr_key")
     private String key;
 
-    @NotBlank(message = "Value musi nie moze byc pusty")
-    @Size(max = 100,message = "Value jest za dlugi")
+    @NotBlank(message = "Value can't be empty")
+    @Size(max = 100,message = "Value is too long max length is 100 characters" )
     @Column(name = "attr_value")
     private String value;
 

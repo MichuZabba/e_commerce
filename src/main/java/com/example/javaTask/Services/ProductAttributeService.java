@@ -1,6 +1,6 @@
-package com.example.java_task.Services;
+package com.example.javaTask.Services;
 
-import com.example.java_task.Repositories.ProductAttributeRepository;
+import com.example.javaTask.Repositories.ProductAttributeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

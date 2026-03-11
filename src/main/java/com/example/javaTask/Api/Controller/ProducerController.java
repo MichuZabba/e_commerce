@@ -1,8 +1,8 @@
-package com.example.java_task.Api.Controller;
+package com.example.javaTask.Api.Controller;
 
 
-import com.example.java_task.Models.Producer;
-import com.example.java_task.Services.ProducerService;
+import com.example.javaTask.Models.Producer;
+import com.example.javaTask.Services.ProducerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

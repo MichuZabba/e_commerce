@@ -1,11 +1,11 @@
-package com.example.java_task.Services;
+package com.example.javaTask.Services;
 
-import com.example.java_task.Models.Producer;
-import com.example.java_task.Models.Product;
-import com.example.java_task.Models.ProductAttribute;
-import com.example.java_task.Repositories.ProducerRepository;
-import com.example.java_task.Repositories.ProductRepository;
-import com.example.java_task.Specifications.ProductSpecifications;
+import com.example.javaTask.Models.Producer;
+import com.example.javaTask.Models.Product;
+import com.example.javaTask.Models.ProductAttribute;
+import com.example.javaTask.Repositories.ProducerRepository;
+import com.example.javaTask.Repositories.ProductRepository;
+import com.example.javaTask.Specifications.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,7 @@ public class ProductService {
     @Transactional
     public Product updateProductById(Long id, Product productToUpdateDetails){
         Product productToUpdate = productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Produkt nie istnieje"));
+                .orElseThrow(()-> new RuntimeException("Product does not exists"));
 
         productToUpdate.setName(productToUpdateDetails.getName());
         productToUpdate.setDescription(productToUpdateDetails.getDescription());
@@ -78,7 +78,7 @@ public class ProductService {
 
     public Product getProductById(Long id){
         return productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Produkt o id " + id + " nie istnieje"));
+                .orElseThrow(()-> new RuntimeException("Products with id " + id + " does not exists"));
     }
 
     public List<Product> getProductsByAttribute(String key) {

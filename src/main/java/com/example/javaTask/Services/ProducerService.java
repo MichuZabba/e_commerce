@@ -1,8 +1,7 @@
-package com.example.java_task.Services;
+package com.example.javaTask.Services;
 
-import com.example.java_task.Models.Producer;
-import com.example.java_task.Models.Product;
-import com.example.java_task.Repositories.ProducerRepository;
+import com.example.javaTask.Models.Producer;
+import com.example.javaTask.Repositories.ProducerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public class ProducerService {
     @Transactional
     public Producer updateProducerById(Long id,Producer producerUpdateDetails){
         Producer producerToUpdate = producerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Produkt nie istnieje"));
+                .orElseThrow(()-> new RuntimeException("Producent does not exists"));
 
         producerToUpdate.setName(producerUpdateDetails.getName());;
 
@@ -35,7 +34,7 @@ public class ProducerService {
 
     public Producer getProducerById(Long id) {
         return producerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producent o danym: " + id + " nie istnieje"));
+                .orElseThrow(() -> new RuntimeException("Prodecent with id: " + id + " does not exists"));
     }
 
     public List<Producer> getAllProducers(){

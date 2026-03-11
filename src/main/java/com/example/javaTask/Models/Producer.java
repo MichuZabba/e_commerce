@@ -1,8 +1,6 @@
-package com.example.java_task.Models;
+package com.example.javaTask.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -20,7 +18,7 @@ public class Producer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Nazwa producenta jest wymagana")
+    @NotNull(message = "Producent name is requier")
     private String name;
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)

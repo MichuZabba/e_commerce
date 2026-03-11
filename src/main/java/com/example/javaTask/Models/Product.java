@@ -1,6 +1,5 @@
-package com.example.java_task.Models;
+package com.example.javaTask.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -25,14 +24,14 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Nazwa produktu jest wymagana")
+    @NotBlank(message = "Name of the product is require")
     private String name;
 
-    @Size(max = 1000, message = "Opis moze miec maksymalnie 1000 znakow")
+    @Size(max = 1000, message = "Description has max length of 1000 characters")
     private String description;
 
-    @NotNull(message = "Cena jest wymagana")
-    @DecimalMin(value = "0.01",message = "Cena musi być wieksza od 0")
+    @NotNull(message = "Price is require")
+    @DecimalMin(value = "0.01",message = "Price must be higher than 0")
     private BigDecimal price;
 
     @ManyToOne

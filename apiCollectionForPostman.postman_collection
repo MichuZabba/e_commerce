@@ -21,7 +21,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "http://localhost:8081/api/products",
@@ -151,7 +151,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "http://localhost:8081/api/products/withAttribute/Etui",
@@ -183,7 +183,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "http://localhost:8081/api/products/4",
