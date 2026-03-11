@@ -7,14 +7,17 @@ import com.example.javaTask.producer.repository.ProducerRepository;
 import com.example.javaTask.product.dto.ProductDTO;
 import com.example.javaTask.product.model.Product;
 import com.example.javaTask.product.repository.ProductRepository;
+import com.example.javaTask.product.request.SearchProductRequest;
 import com.example.javaTask.product.response.*;
 import com.example.javaTask.productAttribute.model.ProductAttribute;
 import com.example.javaTask.Specifications.ProductSpecifications;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +29,6 @@ public class ProductService {
     private final ProducerRepository producerRepository;
     private final AppMapper appMapper;
 
-    @Autowired
     public ProductService(ProductRepository productRepository, ProducerRepository producerRepository, AppMapper appMapper)
     {
         this.producerRepository = producerRepository;
@@ -91,7 +93,7 @@ public class ProductService {
     }
 
     public GetAllProductsResponse getAllProducts() {
-        List<GetProductByIdResponse> list = productRepository.findAll().stream()
+        List<GetProductResponse> list = productRepository.findAll().stream()
                 .map(appMapper::toGetProductByIdResponse)
                 .collect(Collectors.toList());
         GetAllProductsResponse response = new GetAllProductsResponse();
@@ -99,19 +101,68 @@ public class ProductService {
         return response;
     }
 
-    public GetProductByIdResponse getProductById(Long id) {
+    public GetProductResponse getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does not exists"));
         return appMapper.toGetProductByIdResponse(product);
     }
 
     public GetProductsByAttributeResponse getProductsByAttribute(String key) {
-        List<GetProductByIdResponse> list = productRepository
+        List<GetProductResponse> list = productRepository
                 .findAll(ProductSpecifications.hasAttribute(key)).stream()
                 .map(appMapper::toGetProductByIdResponse)
                 .collect(Collectors.toList());
         GetProductsByAttributeResponse response = new GetProductsByAttributeResponse();
         response.setProducts(list);
+        return response;
+    }
+
+    public PagedResponse<GetProductResponse> searchProduct(SearchProductRequest searchProductRequest)
+    {
+        Sort.Direction direction = Sort.Direction.DESC;
+        if(searchProductRequest.getSortDirection() !=null && searchProductRequest.getSortDirection().equalsIgnoreCase("ASC")){
+            direction = Sort.Direction.ASC;
+        }
+
+        String sortBy = (searchProductRequest.getSortBy() != null && !searchProductRequest.getSortBy().isEmpty())
+                ? searchProductRequest.getSortBy()
+                : "id";
+
+        Pageable pageable = PageRequest.of(
+                searchProductRequest.getPageNumber(),
+                searchProductRequest.getPageSize(),
+                Sort.by(direction,sortBy)
+        );
+
+        Specification<Product> spec = (root, query, cb) -> {
+            String filter = searchProductRequest.getFilter();
+            String filterBy = searchProductRequest.getFilterBy();
+            String operand = searchProductRequest.getFilterOperand();
+
+            if (filter == null || filterBy == null || operand == null) {
+                return null;
+            }
+
+            return switch (operand.toLowerCase()) {
+                case "like" -> cb.like(cb.lower(root.get(filterBy)), "%" + filter.toLowerCase() + "%");
+                case "eq"   -> cb.equal(root.get(filterBy), filter);
+                case "gt"   -> cb.greaterThan(root.get(filterBy), filter);
+                case "lt"   -> cb.lessThan(root.get(filterBy), filter);
+                default     -> null;
+            };
+        };
+
+        Page<Product> productPage = productRepository.findAll(spec,pageable);
+
+        List<GetProductResponse> mappedResults = productPage.getContent().stream()
+                .map(appMapper::toGetProductResponse)
+                .toList();
+
+        PagedResponse<GetProductResponse> response = new PagedResponse<>();
+        response.setResult(mappedResults);
+        response.setCurrentPage(searchProductRequest.getPageNumber());
+        response.setNumberOfPages(productPage.getTotalPages());
+
         return response;
     }
 }

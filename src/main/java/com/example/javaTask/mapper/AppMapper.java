@@ -21,6 +21,7 @@ public interface AppMapper {
     ProducerResponse toCreateProducerResponse(Producer producer);
     ProducerResponse toUpdateProducerResponse(Producer producer);
     ProducerResponse toProducerResponse(Producer producer);
+    GetProductResponse toGetProductResponse(Product product);
 
     // Product
     ProductDTO toDTO(Product product);
@@ -28,7 +29,7 @@ public interface AppMapper {
     @Mapping(target = "attributes", ignore = true)
     Product toEntity(ProductDTO dto);
 
-    GetProductByIdResponse toGetProductByIdResponse(Product product);
+    GetProductResponse toGetProductByIdResponse(Product product);
     CreateProductResponse toCreateProductResponse(Product product);
     UpdateProductResponse toUpdateProductResponse(Product product);
 

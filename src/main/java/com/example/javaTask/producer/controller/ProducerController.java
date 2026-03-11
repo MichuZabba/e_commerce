@@ -3,6 +3,8 @@ package com.example.javaTask.producer.controller;
 import com.example.javaTask.producer.dto.ProducerDTO;
 import com.example.javaTask.producer.response.*;
 import com.example.javaTask.producer.service.ProducerService;
+import com.example.javaTask.product.controller.ProductController;
+import com.example.javaTask.product.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/producers")
-@RequiredArgsConstructor
 public class ProducerController {
 
     private final ProducerService producerService;
+
+    public ProducerController(ProducerService producerService){
+        this.producerService = producerService;
+    }
 
     @GetMapping
     public ResponseEntity<GetAllProducersResponse> getAllProducers() {

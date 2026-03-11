@@ -11,7 +11,6 @@ public class ProductAttributeService {
 
     private final ProductAttributeRepository productAttributeRepository;
 
-    @Autowired
     public  ProductAttributeService(ProductAttributeRepository productAttributeRepository){
         this.productAttributeRepository = productAttributeRepository;
     }

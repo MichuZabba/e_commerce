@@ -18,7 +18,6 @@ public class ProducerService {
     private final ProducerRepository producerRepository;
     private final AppMapper appMapper;
 
-    @Autowired
     public ProducerService(ProducerRepository producerRepository, AppMapper appMapper)
     {
         this.producerRepository = producerRepository;

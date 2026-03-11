@@ -5,5 +5,5 @@ import java.util.List;
 
 @Data
 public class GetProductsByAttributeResponse {
-    private List<GetProductByIdResponse> products;
+    private List<GetProductResponse> products;
 }
