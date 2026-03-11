@@ -1,6 +1,5 @@
 package com.example.java_task.Api.Controller;
 
-import com.example.java_task.Models.Producer;
 import com.example.java_task.Models.Product;
 import com.example.java_task.Services.ProductService;
 import jakarta.validation.Valid;

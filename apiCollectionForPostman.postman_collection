@@ -39,7 +39,7 @@
           "response": []
         },
         {
-          "name": "deleteProduct",
+          "name": "deleteProductById",
           "event": [
             {
               "listen": "test",

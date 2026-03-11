@@ -7,10 +7,8 @@ import com.example.java_task.Repositories.ProducerRepository;
 import com.example.java_task.Repositories.ProductRepository;
 import com.example.java_task.Specifications.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
