@@ -1,5 +1,6 @@
 package com.example.javaTask.product.service;
 
+import com.example.javaTask.common.search.PagedResponse;
 import com.example.javaTask.exception.ResourceNotFoundException;
 import com.example.javaTask.mapper.AppMapper;
 import com.example.javaTask.producer.model.Producer;

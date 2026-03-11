@@ -1,4 +1,4 @@
-package com.example.javaTask.product.response;
+package com.example.javaTask.common.search;
 
 import lombok.Data;
 

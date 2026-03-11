@@ -1,12 +1,11 @@
 package com.example.javaTask.product.controller;
 
+import com.example.javaTask.common.search.PagedResponse;
 import com.example.javaTask.product.dto.ProductDTO;
 import com.example.javaTask.product.request.SearchProductRequest;
 import com.example.javaTask.product.response.*;
 import com.example.javaTask.product.service.ProductService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
