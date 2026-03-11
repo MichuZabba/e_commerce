@@ -2,7 +2,6 @@ package com.example.java_task.Services;
 
 import com.example.java_task.Models.Producer;
 import com.example.java_task.Repositories.ProducerRepository;
-import com.example.java_task.Repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
