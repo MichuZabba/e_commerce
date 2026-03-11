@@ -1,5 +1,7 @@
-package com.example.javaTask.Models;
+package com.example.javaTask.product.model;
 
+import com.example.javaTask.productAttribute.model.ProductAttribute;
+import com.example.javaTask.producer.model.Producer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -14,8 +16,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

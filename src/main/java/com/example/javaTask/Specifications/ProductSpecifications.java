@@ -1,7 +1,7 @@
 package com.example.javaTask.Specifications;
 
-import com.example.javaTask.Models.Product;
-import com.example.javaTask.Models.ProductAttribute;
+import com.example.javaTask.product.model.Product;
+import com.example.javaTask.productAttribute.model.ProductAttribute;
 import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 

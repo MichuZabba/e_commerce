@@ -1,5 +1,6 @@
-package com.example.javaTask.Models;
+package com.example.javaTask.productAttribute.model;
 
+import com.example.javaTask.product.model.Product;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -7,8 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
