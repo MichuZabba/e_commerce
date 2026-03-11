@@ -1,5 +1,8 @@
 package com.example.java_task.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
@@ -32,12 +35,13 @@ public class Product {
     @DecimalMin(value = "0.01",message = "Cena musi być wieksza od 0")
     private BigDecimal price;
 
-    @NotNull(message = "Produkt musi mieć przypisanego producenta")
     @ManyToOne
     @JoinColumn(name = "producer_id")
+    @JsonIgnoreProperties("products")
     private Producer producer;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
     @Valid
+    @JsonManagedReference("product-attribute")
     private List<ProductAttribute> attributes;
 }

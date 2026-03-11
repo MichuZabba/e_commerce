@@ -1,0 +1,363 @@
+{
+  "info": {
+    "_postman_id": "13334426-43d9-48f9-9824-546f1c1f8a90",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53084589",
+    "_collection_link": "https://go.postman.co/collection/53084589-13334426-43d9-48f9-9824-546f1c1f8a90?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "getAllProducts",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteProduct",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products",
+                "2"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "createProduct",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateProductById",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Słuchawki Sony WH-1000XM5 (Black Edition)\",\r\n  \"description\": \"Edycja limitowana w kolorze głębokiej czerni.\",\r\n  \"price\": 1450.50,\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Etui\",\r\n      \"value\": \"Skórzane\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getListOFProductsWithGivenAttribute",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products/withAttribute/Etui",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products",
+                "withAttribute",
+                "Etui"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getProductById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Smartwatch Pro 5\",\r\n  \"description\": \"Nowoczesny zegarek z wyświetlaczem AMOLED i baterią trzymającą 14 dni.\",\r\n  \"price\": 899.99,\r\n  \"producer\": {\r\n    \"id\": 1\r\n  },\r\n  \"attributes\": [\r\n    {\r\n      \"key\": \"Kolor\",\r\n      \"value\": \"Czarny\"\r\n    },\r\n    {\r\n      \"key\": \"Wodoszczelność\",\r\n      \"value\": \"5 ATM\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/products/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "products",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Producers",
+      "item": [
+        {
+          "name": "getAllProducers",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/producers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "producers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getProducersById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/producers/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "producers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "createProducers",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Apple\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/producers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "producers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateProducerById",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Apple Inc.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/producers/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "producers",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteProducerById",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/producers/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "producers",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

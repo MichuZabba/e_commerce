@@ -1,5 +1,8 @@
 package com.example.java_task.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -21,6 +24,7 @@ public class Producer {
     private String name;
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("producer")
     private List<Product> products;
 
 }

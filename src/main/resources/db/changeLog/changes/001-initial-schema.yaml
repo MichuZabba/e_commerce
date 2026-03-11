@@ -18,6 +18,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
+                    unique: true
 
         - createTable:
             tableName: product
@@ -62,12 +63,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: key
+                  name: attr_key
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: value
+                  name: attr_value
                   type: TEXT
               - column:
                   name: product_id
