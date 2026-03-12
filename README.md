@@ -19,7 +19,7 @@ git clone https://github.com/MichuZabba/e_commerce.git
 cd e_commerce
 ```
 
-**2. Skonfiguruj bazę danych:**
+**2. Skonfiguruj bazę danych Postgre:**
 Otwórz plik `src/main/resources/application.properties` i zaktualizuj dane połączenia:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/twoja_nazwa_bazy
@@ -100,5 +100,6 @@ Każdy endpoint API zwraca dedykowaną klasę odpowiedzi, co zapewnia czytelny k
 | GET | `/api/products/{id}` | Pobierz produkt po ID |
 | GET | `/api/products/withAttribute/{attribute}` | Pobierz produkty z danym atrybutem |
 | POST | `/api/products` | Utwórz nowy produkt |
+| POST | `/api/products/commands/search` | Wyszukuje produkty z filtrowaniem i stronicowaniem |
 | PUT | `/api/products/{id}` | Zaktualizuj produkt |
 | DELETE | `/api/products/{id}` | Usuń produkt |
