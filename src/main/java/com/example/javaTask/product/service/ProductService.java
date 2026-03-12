@@ -19,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -118,42 +120,54 @@ public class ProductService {
         return response;
     }
 
-    public PagedResponse<GetProductResponse> searchProduct(SearchProductRequest searchProductRequest)
-    {
-        Sort.Direction direction = Sort.Direction.DESC;
-        if(searchProductRequest.getSortDirection() !=null && searchProductRequest.getSortDirection().equalsIgnoreCase("ASC")){
-            direction = Sort.Direction.ASC;
-        }
+    private Pageable createPageable(SearchProductRequest request) {
+        Sort.Direction direction = (request.getSortDirection() != null &&
+                request.getSortDirection().equalsIgnoreCase("ASC"))
+                ? Sort.Direction.ASC : Sort.Direction.DESC;
 
-        String sortBy = (searchProductRequest.getSortBy() != null && !searchProductRequest.getSortBy().isEmpty())
-                ? searchProductRequest.getSortBy()
-                : "id";
+        String sortBy = (request.getSortBy() != null && !request.getSortBy().isEmpty())
+                ? request.getSortBy() : "id";
 
-        Pageable pageable = PageRequest.of(
-                searchProductRequest.getPageNumber(),
-                searchProductRequest.getPageSize(),
-                Sort.by(direction,sortBy)
-        );
+        return PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by(direction, sortBy));
+    }
 
-        Specification<Product> spec = (root, query, cb) -> {
-            String filter = searchProductRequest.getFilter();
-            String filterBy = searchProductRequest.getFilterBy();
-            String operand = searchProductRequest.getFilterOperand();
+    private Specification<Product> createSpecification(SearchProductRequest request) {
+        return (root, query, cb) -> {
+            String filter = request.getFilter();
+            String filterBy = request.getFilterBy();
+            String operand = request.getFilterOperand();
 
             if (filter == null || filterBy == null || operand == null) {
                 return null;
             }
 
+            // Obsługa różnych typów danych (np. BigDecimal dla ceny)
             return switch (operand.toLowerCase()) {
                 case "like" -> cb.like(cb.lower(root.get(filterBy)), "%" + filter.toLowerCase() + "%");
                 case "eq"   -> cb.equal(root.get(filterBy), filter);
-                case "gt"   -> cb.greaterThan(root.get(filterBy), filter);
-                case "lt"   -> cb.lessThan(root.get(filterBy), filter);
-                default     -> null;
+                case "gt"   -> {
+                    if ("price".equals(filterBy)) {
+                        yield cb.greaterThan(root.get(filterBy), new BigDecimal(filter));
+                    }
+                    yield cb.greaterThan(root.get(filterBy), filter);
+                }
+                case "lt"   -> {
+                    if ("price".equals(filterBy)) {
+                        yield cb.lessThan(root.get(filterBy), new BigDecimal(filter));
+                    }
+                    yield cb.lessThan(root.get(filterBy), filter);
+                }
+                default -> null;
             };
         };
+    }
 
-        Page<Product> productPage = productRepository.findAll(spec,pageable);
+    public PagedResponse<GetProductResponse> searchProduct(SearchProductRequest searchProductRequest) {
+
+        Pageable pageable = createPageable(searchProductRequest);
+        Specification<Product> spec = createSpecification(searchProductRequest);
+
+        Page<Product> productPage = productRepository.findAll(spec, pageable);
 
         List<GetProductResponse> mappedResults = productPage.getContent().stream()
                 .map(appMapper::toGetProductResponse)
